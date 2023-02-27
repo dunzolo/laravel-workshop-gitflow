@@ -102,6 +102,3 @@
                 'cover_path' => 'https://www.themoviedb.org/t/p/w1280/5KkmPSGnZvynFJL1dPculX2KcR4.jpg'
             ]
         ];
-​
-    
-?>
