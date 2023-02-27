@@ -18,4 +18,4 @@ use App\Http\Controllers\MoviesController as MoviesController;
 
 Route::get('/', [PagesController::class,'index'])->name('homepage');
 
-Route::get('/movies', MoviesController::class, 'index');
+// Route::get('movies', MoviesController::class);
