@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Movie;
 
 class MoviesController extends Controller
 {
@@ -13,7 +14,9 @@ class MoviesController extends Controller
      */
     public function index()
     {
-        //
+        $movies = Movie::all();
+
+        return view('movies.index', compact('movies'));
     }
 
     /**
@@ -45,8 +48,12 @@ class MoviesController extends Controller
      */
     public function show($id)
     {
-        //
+        $movie = Movie::findOrFail($id);
+
+        return view('comics.show', $movie);
+        abort(404);
     }
+
 
     /**
      * Show the form for editing the specified resource.

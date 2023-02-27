@@ -16,6 +16,6 @@ use App\Http\Controllers\MoviesController as MoviesController;
 |
 */
 
-Route::get('/', [PagesController::class,'index'])->name('homepage');
+Route::get('/', [PagesController::class, 'index'])->name('homepage');
 
-// Route::get('movies', MoviesController::class);
+Route::resource('movies', MoviesController::class);
