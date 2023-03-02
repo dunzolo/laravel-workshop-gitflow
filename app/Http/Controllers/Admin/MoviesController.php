@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMovieRequest;
 use App\Http\Requests\UpdateMovieRequest;
 use App\Models\Movie;
+use Illuminate\Support\Facades\Redirect;
 
 class MoviesController extends Controller
 {
@@ -29,7 +30,7 @@ class MoviesController extends Controller
      */
     public function create()
     {
-        //
+        return view('movies.create');
     }
 
     /**
@@ -40,7 +41,11 @@ class MoviesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $form_data = $request->all();
+
+        $new_movie = Movie::create($form_data);
+
+        return Redirect()->route('admin.movies.index');
     }
 
     /**
