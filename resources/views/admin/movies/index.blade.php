@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 @section('content')
 <div class="container">
     <div class="row">
@@ -22,7 +22,7 @@
                         <tr>
                             <td>{{$movie->id}}</td>
                             <td>
-                                <a href="{{ route('movies.show',['movie' => $movie->id])}}">
+                                <a href="{{ route('admin.movies.show',['movie' => $movie->id])}}">
                                     <img class="w-25" src="{{$movie->cover_path}}" alt="{{$movie->title}}">
                                 </a>
                             </td>
@@ -33,7 +33,21 @@
                             <td>{{$movie->vote}}</td>
                             <td>{{$movie->cast}}</td>
                             <td>
-                                
+                                <div class="d-flex">
+                                    <a class="btn btn-sm btn-info" href="{{ route('admin.movies.show', $movies->slug) }}">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
+                                    <a class="btn btn-sm btn-warning ms-2 me-2" href="{{-- {{ route('admin.movies.edit', $movies->slug) }} --}}">
+                                        <i class="fa-solid fa-pencil"></i>
+                                    </a>
+                                    <form action="{{-- {{ route('admin.movies.destroy', $movies->slug)}} --}}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @endforeach

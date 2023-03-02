@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 @section('content')
 <div class="container">
     <div class="container">
@@ -9,7 +9,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <form class="" action="{{ route('movie.store') }}" method="POST">
+                <form class="" action="{{ route('admin.movies.store') }}" method="POST">
                     @csrf
                     <div class="form-group my-3">
                         <label class="control-label" for="title">
