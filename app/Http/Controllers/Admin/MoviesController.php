@@ -30,7 +30,7 @@ class MoviesController extends Controller
      */
     public function create()
     {
-        return view('movies.create');
+        return view('admin.movies.create');
     }
 
     /**
@@ -69,8 +69,7 @@ class MoviesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit(Movie $movie){
         $movie = Movie::findOrFail($id);
 
         return view('admin.movies.edit', compact('movie'));
