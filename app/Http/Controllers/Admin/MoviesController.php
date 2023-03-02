@@ -1,8 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreProjectRequest;
+use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Movie;
 
 class MoviesController extends Controller
@@ -16,7 +19,7 @@ class MoviesController extends Controller
     {
         $movies = Movie::all();
 
-        return view('movies.index', compact('movies'));
+        return view('admin.movies.index', compact('movies'));
     }
 
     /**
@@ -50,7 +53,7 @@ class MoviesController extends Controller
     {
         $movie = Movie::findOrFail($id);
 
-        return view('movies.show', compact('movie'));
+        return view('admin.movies.show', compact('movie'));
         abort(404);
     }
 
