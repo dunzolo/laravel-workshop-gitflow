@@ -50,7 +50,7 @@ class MoviesController extends Controller
     {
         $movie = Movie::findOrFail($id);
 
-        return view('comics.show', $movie);
+        return view('movies.show', compact('movie'));
         abort(404);
     }
 

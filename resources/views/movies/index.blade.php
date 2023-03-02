@@ -14,6 +14,7 @@
                     <th scope="col">RELEASE DATE</th>
                     <th scope="col">VOTE</th>
                     <th scope="col">CAST</th>
+                    <th scope="col">ACTION</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -21,7 +22,7 @@
                         <tr>
                             <td>{{$movie->id}}</td>
                             <td>
-                                <a href="{{-- {{ route('movies.show',['movie' => $movie->id])}} --}}">
+                                <a href="{{ route('movies.show',['movie' => $movie->id])}}">
                                     <img class="w-25" src="{{$movie->cover_path}}" alt="{{$movie->title}}">
                                 </a>
                             </td>
@@ -31,6 +32,9 @@
                             <td>{{$movie->release_date}}</td>
                             <td>{{$movie->vote}}</td>
                             <td>{{$movie->cast}}</td>
+                            <td>
+                                
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
