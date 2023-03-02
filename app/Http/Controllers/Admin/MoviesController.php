@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMovieRequest;
 use App\Http\Requests\UpdateMovieRequest;
 use App\Models\Movie;
+use Illuminate\Support\Facades\Redirect;
 
 class MoviesController extends Controller
 {
@@ -29,7 +30,7 @@ class MoviesController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.movies.create');
     }
 
     /**
@@ -40,7 +41,11 @@ class MoviesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $form_data = $request->all();
+
+        $new_movie = Movie::create($form_data);
+
+        return Redirect()->route('admin.movies.index');
     }
 
     /**
@@ -64,8 +69,9 @@ class MoviesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Movie $movie)
-    {
+    public function edit(Movie $movie){
+        $movie = Movie::findOrFail($id);
+
         return view('admin.movies.edit', compact('movie'));
     }
 
@@ -76,9 +82,13 @@ class MoviesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateMovieRequest $request, Movie $project)
     {
-        //
+
+        $form = $request->validated();
+
+        $project->update($form);
+        return redirect()->route('admin.movies.index')->with('message', 'Movie Modificato');
     }
 
     /**
