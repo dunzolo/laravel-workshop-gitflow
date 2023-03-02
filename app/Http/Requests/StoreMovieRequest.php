@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreMovieRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class StoreMovieRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,13 @@ class StoreMovieRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'cover_path' => ['nullable'],
+            'title' => ['required', Rule::unique('movie')->ignore($this->movie), 'max:100'],
+            'original_title' => ['required', Rule::unique('movie')->ignore($this->movie), 'max:100'],
+            'nationality' => ['required', 'max:50'],
+            'releade_date' => ['nullable'],
+            'vote' => ['required'],
+            'cast' => ['nullable']
         ];
     }
 }
