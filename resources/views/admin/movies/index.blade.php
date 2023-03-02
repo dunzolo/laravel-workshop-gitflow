@@ -45,7 +45,7 @@
                                     <a class="btn btn-sm btn-info" href="{{ route('admin.movies.show', $movie->id) }}">
                                         <i class="fa-solid fa-eye"></i>
                                     </a>
-                                    <a class="btn btn-sm btn-warning ms-2 me-2" href="{{-- {{ route('admin.movie.edit', $movies->id) }} --}}">
+                                    <a class="btn btn-sm btn-warning ms-2 me-2" href="{{ route('admin.movies.edit', $movie->id) }}">
                                         <i class="fa-solid fa-pencil"></i>
                                     </a>
                                     <form action="{{ route('admin.movies.destroy', $movie->id)}}" method="POST">

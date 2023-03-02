@@ -64,9 +64,9 @@ class MoviesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Movie $movie)
     {
-        //
+        return view('admin.movies.edit', compact('movie'));
     }
 
     /**
