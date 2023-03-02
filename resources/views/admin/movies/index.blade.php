@@ -48,7 +48,7 @@
                                     <a class="btn btn-sm btn-warning ms-2 me-2" href="{{-- {{ route('admin.movie.edit', $movies->id) }} --}}">
                                         <i class="fa-solid fa-pencil"></i>
                                     </a>
-                                    <form action="{{-- {{ route('admin.movies.destroy', $movie->id)}} --}}" method="POST">
+                                    <form action="{{ route('admin.movies.destroy', $movie->id)}}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger">
