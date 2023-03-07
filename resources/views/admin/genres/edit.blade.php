@@ -24,6 +24,9 @@
                     <label class="control-label">Genre</label>
                     <input type="text" class="form-control" name="genre" id="genre" placeholder="Genre">
                 </div>
+                @error('genre')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
                 <div class="mt-3 form-group">
                     <button type="submit" class="btn btn-sm btn-secondary">Save</button>
                 </div>
