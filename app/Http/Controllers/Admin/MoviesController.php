@@ -69,7 +69,8 @@ class MoviesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Movie $movie){
+    public function edit($id)
+    {
         $movie = Movie::findOrFail($id);
 
         return view('admin.movies.edit', compact('movie'));
