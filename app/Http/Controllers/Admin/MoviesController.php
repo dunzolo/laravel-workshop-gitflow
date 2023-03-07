@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMovieRequest;
 use App\Http\Requests\UpdateMovieRequest;
-use App\Models\Movie;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\Movie;
 use App\Models\Cast;
 use App\Models\Genre;
 
