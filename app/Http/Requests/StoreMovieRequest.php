@@ -34,4 +34,15 @@ class StoreMovieRequest extends FormRequest
             'cast'              => ['nullable']
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'title.requied'           => 'Title Requied to procede',
+            'title.unique'            => 'This Title is already Memorized',
+            'original_title.requied'  => 'Original Title Requied to procede',
+            'original_title.unique'   => 'This Original Title is already Memorized',
+            'vote'                    => 'Insert a valid Vote value'
+        ];
+    }
 }
