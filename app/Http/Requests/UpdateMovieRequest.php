@@ -31,7 +31,7 @@ class UpdateMovieRequest extends FormRequest
             'nationality'    => ['required', 'max:50'],
             'releade_date'   => ['nullable'],
             'vote'           => ['required'],
-            'cast'           => ['nullable']
+            'cast'           => ['nullable'],
         ];
     }
 
@@ -42,7 +42,8 @@ class UpdateMovieRequest extends FormRequest
             'title.unique'            => 'This Title is already Memorized',
             'original_title.requied'  => 'Original Title Requied to procede',
             'original_title.unique'   => 'This Original Title is already Memorized',
-            'vote'                    => 'Insert a valid Vote value'
+            'nationality.requied'     => 'Nationality requied to procede',
+            'vote.requied'            => 'Insert a valid Vote value'
         ];
     }
 }
