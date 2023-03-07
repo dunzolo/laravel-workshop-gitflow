@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cast;
 use App\Http\Requests\StoreCastRequest;
 use App\Http\Requests\UpdateCastRequest;
+use App\Models\Movie;
 
 class CastController extends Controller
 {
@@ -15,7 +16,8 @@ class CastController extends Controller
      */
     public function index()
     {
-        //
+        $casts = Cast::all();
+        return view('admin.casts.index', compact('casts'));
     }
 
     /**
@@ -25,7 +27,7 @@ class CastController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.casts.create');
     }
 
     /**
@@ -36,7 +38,18 @@ class CastController extends Controller
      */
     public function store(StoreCastRequest $request)
     {
-        //
+        $form_data = $request->validated();
+        $slug = Movie::generateSlug($request->name, '-');
+
+        $form_data['slug'] = $slug;
+
+        $newCast = new Cast();
+
+        $newCast->fill($form_data);
+
+        $newCast->save();
+
+        return redirect()->route('admin.casts.index')->with('message', 'CAST CREATED');
     }
 
     /**
@@ -47,7 +60,7 @@ class CastController extends Controller
      */
     public function show(Cast $cast)
     {
-        //
+        return view('admin.casts.show', compact('cast'));
     }
 
     /**
@@ -58,7 +71,7 @@ class CastController extends Controller
      */
     public function edit(Cast $cast)
     {
-        //
+        return view('admin.casts.edit', compact('cast'));
     }
 
     /**
@@ -70,7 +83,15 @@ class CastController extends Controller
      */
     public function update(UpdateCastRequest $request, Cast $cast)
     {
-        //
+        $form_data = $request->validated();
+        $slug = Movie::generateSlug($request->name, '-');
+
+        $form_data['slug'] = $slug;
+
+        $cast->update($form_data);
+
+
+        return redirect()->route('admin.casts.index')->with('message', 'MODIFIED CAST');
     }
 
     /**
@@ -81,6 +102,8 @@ class CastController extends Controller
      */
     public function destroy(Cast $cast)
     {
-        //
+        $cast->delete();
+
+        return redirect()->route('admin.casts.index')->with('message', 'CAST CANCELLED');
     }
 }
