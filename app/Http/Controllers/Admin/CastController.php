@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Cast;
 use App\Http\Requests\StoreCastRequest;
 use App\Http\Requests\UpdateCastRequest;
@@ -60,6 +61,7 @@ class CastController extends Controller
      */
     public function show(Cast $cast)
     {
+
         return view('admin.casts.show', compact('cast'));
     }
 
