@@ -31,7 +31,7 @@
                             <td>{{$movie->id}}</td>
                             <td>
                                 <a href="{{ route('admin.movies.show', $movie->id)}}">
-                                    <img class="w-25" src="{{$movie->cover_path}}" alt="{{$movie->title}}">
+                                    <img class="w-50" src="{{$movie->cover_path}}" alt="{{$movie->title}}">
                                 </a>
                             </td>
                             <td>{{$movie->title}}</td>

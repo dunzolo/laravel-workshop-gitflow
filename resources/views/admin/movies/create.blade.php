@@ -24,6 +24,12 @@
                         <input type="text" class="form-control" id="original_title" name="original_title" placeholder="Write the original title of the movie">
                     </div>
                     <div class="form-group my-3">
+                        <label class="control-label" for="title">
+                            Vote
+                        </label>
+                        <input type="text" class="form-control" id="vote" name="vote" placeholder="Write the Vote of the movie">
+                    </div>
+                    <div class="form-group my-3">
                         <label class="control-label" for="nationality">
                             Nationality
                         </label>
@@ -48,7 +54,7 @@
                         <input type="text" class="form-control" id="cover_path" name="cover_path" placeholder="Please copy the Cover link">
                     </div>
                     <div class="form-group my-3">
-                        <button type="submit" class="btn btn-lg btn-danger">Save</button>
+                        <button type="submit" class="btn btn-lg btn-success">Save</button>
                     </div>
                 </form>
             </div>

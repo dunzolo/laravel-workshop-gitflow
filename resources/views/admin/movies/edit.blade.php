@@ -24,6 +24,12 @@
                         <input type="text" class="form-control" id="original_title" name="original_title" placeholder="Write the Original Title of the movie" value="{{ old('original_title') ?? $movie->title}}">
                     </div>
                     <div class="form-group my-3">
+                        <label class="control-label" for="title">
+                            Vote
+                        </label>
+                        <input type="text" class="form-control" id="vote" name="vote" placeholder="Write the Vote of the movie">
+                    </div>
+                    <div class="form-group my-3">
                         <label class="control-label" for="nationality">
                             Nationality
                         </label>
