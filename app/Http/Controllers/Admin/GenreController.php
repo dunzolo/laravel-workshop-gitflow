@@ -62,7 +62,7 @@ class GenreController extends Controller
      */
     public function edit(Genre $genre)
     {
-        //
+        return view('admin.genres.edit', compact('genre'));
     }
 
     /**
@@ -74,7 +74,13 @@ class GenreController extends Controller
      */
     public function update(UpdateGenreRequest $request, Genre $genre)
     {
-        //
+        $form_data = $request->validated();
+
+        $slug = Genre::generateSlug($request->genre);
+
+        $genre->update($form_data);
+
+        return redirect()->route('admin.genre.index')->with('message', 'Genre modyfied Correctly');
     }
 
     /**
