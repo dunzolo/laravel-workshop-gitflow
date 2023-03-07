@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class UpdateCastRequest extends FormRequest
+class UpdateMovieRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +14,7 @@ class UpdateCastRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,15 @@ class UpdateCastRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name_surname'   => ['requied', Rule::unique('cast')->ignore($this->cast), 'max:60']
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name_surname.requied'    => 'Name and Surname are Requied to procede',
+            'name_surname.unique'     => 'This Actor is already Memorized'
         ];
     }
 }
