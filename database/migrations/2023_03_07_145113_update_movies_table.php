@@ -18,14 +18,14 @@ return new class extends Migration
             $table->dropColumn('cast');
 
             //2: creo la colonna in riferimento alla tabella casts
-            $table->unsignedBigInteger('cast_id')
+            $table->unsignedBigInteger('genre_id')
                 ->nullable()
                 ->after('id');
 
             //3: creo la foreign key
-            $table->foreign('cast_id')
+            $table->foreign('genre_id')
                 ->references('id') //nome della colonna a cui fa riferimento
-                ->on('casts') //tabella a cui appartiene
+                ->on('genres') //tabella a cui appartiene
                 ->onDelete('set null'); //setto a NULL la colonna se viene cancellata la categoria
         });
     }
@@ -41,10 +41,10 @@ return new class extends Migration
             $table->string('cast', 150);
             
             //elimina nella tabella movies la foreign cast_id
-            $table->dropForeign('movies_cast_id_foreign');
+            $table->dropForeign('movies_genre_id_foreign');
 
             //elimina la colonna
-            $table->dropColumn('cast_id');
+            $table->dropColumn('genre_id');
         });
     }
 };
