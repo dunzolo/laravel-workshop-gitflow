@@ -26,8 +26,8 @@ class StoreMovieRequest extends FormRequest
     {
         return [
             'cover_path'        => ['nullable'],
-            'title'             => ['required', Rule::unique('movie')->ignore($this->movie), 'max:100'],
-            'original_title'    => ['required', Rule::unique('movie')->ignore($this->movie), 'max:100'],
+            'title'             => ['required', Rule::unique('movies')->ignore($this->movie), 'max:100'],
+            'original_title'    => ['required', Rule::unique('movies')->ignore($this->movie), 'max:100'],
             'nationality'       => ['required', 'max:50'],
             'releade_date'      => ['nullable'],
             'vote'              => ['required'],

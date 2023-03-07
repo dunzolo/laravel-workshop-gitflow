@@ -3,12 +3,28 @@
 <div class="container">
     <div class="container">
         <div class="row">
-            <div class="col-12">
-                <h2 class="text-center">Add a New Movie</h2>
+            <div class="row mt-5">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h2>ADD A NEW FILM</h2>
+                    </div>
+                    <div>
+                        <a href="{{ route('admin.movies.index') }}" class="btn btn-sm btn-primary">Torna all'elenco</a>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul class="list-unstyled mb-0">
+                            @foreach ($errors->all() as $error)
+                            <li><i class="fa-solid fa-triangle-exclamation"></i>{{ $error }}</li>    
+                            @endforeach                
+                        </ul>
+                    </div>
+                @endif
                 <form class="" action="{{ route('admin.movies.store') }}" method="POST">
                     @csrf
                     <div class="form-group my-3">
@@ -42,10 +58,20 @@
                         <input type="date" class="form-control" id="release_date" name="release_date" placeholder="Please sett upp the Release date of the movie">
                     </div>
                     <div class="form-group my-3">
-                        <label class="control-label" for="cast">
+                        <label class="control-label" for="casts">
                             Cast
                         </label>
-                        <input type="text" max-lenght="100" class="form-control" id="cast" name="cast" placeholder="Please write the cast of the movie">
+                        <div class="row">
+                            @foreach ($casts as $cast)
+                            <div class="col-md-3" @error('casts') is-invalid @enderror>
+                                <input type="checkbox" value="{{ $cast->id }}" name="casts[]">
+                                <label for="" class="form-check-label">{{ $cast->name_surname }}</label>
+                                @error('casts')
+                                <div class="invalid-feddback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            @endforeach
+                        </div>
                     </div>
                     <div class="form-group my-3">
                         <label class="control-label" for="cover_path">

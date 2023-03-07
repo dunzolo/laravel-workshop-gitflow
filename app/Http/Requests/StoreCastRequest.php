@@ -25,14 +25,14 @@ class StoreCastRequest extends FormRequest
     public function rules()
     {
         return [
-            'name_surname'   => ['requied', Rule::unique('cast')->ignore($this->cast), 'max:60']
+            'name_surname'   => ['required', Rule::unique('casts')->ignore($this->cast), 'max:60']
         ];
     }
 
     public function messages()
     {
         return [
-            'name_surname.requied'    => 'Name and Surname are Requied to procede',
+            'name_surname.required'    => 'Name and Surname are required to procede',
             'name_surname.unique'     => 'This Actor is already Memorized'
         ];
     }

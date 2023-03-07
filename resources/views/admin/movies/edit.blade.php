@@ -2,15 +2,30 @@
 @section('content')
 <div class="container">
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h2 class="text-center">Modifica Movie</h2>
+        <div class="row mt-5">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h2>MODIFICA FILM</h2>
+                </div>
+                <div>
+                    <a href="{{ route('admin.movies.index') }}" class="btn btn-sm btn-primary">Torna all'elenco</a>
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-                <form class="" action="{{ route('admin.movies.store') }}" method="POST">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul class="list-unstyled mb-0">
+                            @foreach ($errors->all() as $error)
+                            <li><i class="fa-solid fa-triangle-exclamation"></i>{{ $error }}</li>    
+                            @endforeach                
+                        </ul>
+                    </div>
+                @endif
+                <form class="" action="{{ route('admin.movies.update', $movie->id)}}" method="POST">
                     @csrf
+                    @method('PUT')
                     <div class="form-group my-3">
                         <label class="control-label" for="title">
                             Title
@@ -21,13 +36,13 @@
                         <label class="control-label" for="title">
                             Originale Title
                         </label>
-                        <input type="text" class="form-control" id="original_title" name="original_title" placeholder="Write the Original Title of the movie" value="{{ old('original_title') ?? $movie->title}}">
+                        <input type="text" class="form-control" id="original_title" name="original_title" placeholder="Write the Original Title of the movie" value="{{ old('original_title') ?? $movie->original_title}}">
                     </div>
                     <div class="form-group my-3">
                         <label class="control-label" for="title">
                             Vote
                         </label>
-                        <input type="text" class="form-control" id="vote" name="vote" placeholder="Write the Vote of the movie">
+                        <input type="text" class="form-control" id="vote" name="vote" placeholder="Write the Vote of the movie" value="{{ old('vote') ?? $movie->vote}}">
                     </div>
                     <div class="form-group my-3">
                         <label class="control-label" for="nationality">
@@ -45,7 +60,17 @@
                         <label class="control-label" for="cast">
                             Cast
                         </label>
-                        <input type="text" max-lenght="100" class="form-control" id="cast" name="cast" placeholder="Please write the cast of the movie" value="{{ old('cast') ?? $movie->cast}}">
+                        <div class="row">
+                            @foreach ($casts as $cast)
+                            <div class="col-md-3" @error('casts') is-invalid @enderror>
+                                <input type="checkbox" value="{{ $cast->id }}" name="casts[]" {{ $movie->casts->contains($cast) ? 'checked' : ''}}>
+                                <label for="" class="form-check-label">{{ $cast->name_surname }}</label>
+                                @error('casts')
+                                <div class="invalid-feddback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            @endforeach
+                        </div>
                     </div>
                     <div class="form-group my-3">
                         <label class="control-label" for="cover_path">
