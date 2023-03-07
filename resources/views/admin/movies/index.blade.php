@@ -21,7 +21,6 @@
                     <th scope="col">NATIONALITY</th>
                     <th scope="col">RELEASE DATE</th>
                     <th scope="col">VOTE</th>
-                    <th scope="col">CAST</th>
                     <th scope="col">ACTION</th>
                   </tr>
                 </thead>
@@ -39,7 +38,6 @@
                             <td>{{$movie->nationality}}</td>
                             <td>{{$movie->release_date}}</td>
                             <td>{{$movie->vote}}</td>
-                            <td>{{$movie->cast}}</td>
                             <td>
                                 <div class="d-flex">
                                     <a class="btn btn-sm btn-info" href="{{ route('admin.movies.show', $movie->id) }}">

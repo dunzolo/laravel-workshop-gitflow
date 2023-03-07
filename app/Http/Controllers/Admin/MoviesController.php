@@ -98,19 +98,18 @@ class MoviesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMovieRequest $request, Movie $project)
+    public function update(UpdateMovieRequest $request, Movie $movie)
     {
-
         $form_data = $request->validated();
         $slug = Movie::generateSlug($request->title, '-');
 
 
         $form_data['slug'] = $slug;
 
-        $project->update($form_data);
+        $movie->update($form_data);
 
         if ($request->has('casts')) {
-            $project->casts()->sync($request->casts);
+            $movie->casts()->sync($request->casts);
         }
 
         //REINDIRIZZA ALLA PAGINA INDEX. LA FUNZIONE with PASSA ALLA PAGINA INDEX UN MESSAGGIO

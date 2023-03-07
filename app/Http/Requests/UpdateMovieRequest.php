@@ -26,24 +26,25 @@ class UpdateMovieRequest extends FormRequest
     {
         return [
             'cover_path'     => ['nullable'],
-            'title'          => ['required', Rule::unique('movie')->ignore($this->movie), 'max:100'],
-            'original_title' => ['required', Rule::unique('movie')->ignore($this->movie), 'max:100'],
+            'title'          => ['required', Rule::unique('movies')->ignore($this->movie), 'max:100'],
+            'original_title' => ['required', Rule::unique('movies')->ignore($this->movie), 'max:100'],
             'nationality'    => ['required', 'max:50'],
-            'releade_date'   => ['nullable'],
+            'release_date'   => ['nullable'],
             'vote'           => ['required'],
-            'cast'           => ['nullable'],
+            'genre_id'       => ['nullable', 'exists:genre,id'],
+            'casts'          => ['exists:casts,id']
         ];
     }
 
     public function messages()
     {
         return [
-            'title.requied'           => 'Title Requied to procede',
-            'title.unique'            => 'This Title is already Memorized',
-            'original_title.requied'  => 'Original Title Requied to procede',
-            'original_title.unique'   => 'This Original Title is already Memorized',
-            'nationality.requied'     => 'Nationality requied to procede',
-            'vote.requied'            => 'Insert a valid Vote value'
+            // 'title.required'           => 'Title required to procede',
+            // 'title.unique'            => 'This Title is already Memorized',
+            // 'original_title.required'  => 'Original Title required to procede',
+            // 'original_title.unique'   => 'This Original Title is already Memorized',
+            // 'nationality.required'     => 'Nationality required to procede',
+            // 'vote.required'            => 'Insert a valid Vote value'
         ];
     }
 }

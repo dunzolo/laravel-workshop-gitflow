@@ -25,7 +25,7 @@ class UpdateCastRequest extends FormRequest
     public function rules()
     {
         return [
-            'name_surname'   => ['requied', Rule::unique('cast')->ignore($this->cast), 'max:60']
+            'name_surname'   => ['requied', Rule::unique('casts')->ignore($this->cast), 'max:60']
         ];
     }
 
