@@ -8,6 +8,8 @@ use App\Http\Requests\StoreMovieRequest;
 use App\Http\Requests\UpdateMovieRequest;
 use App\Models\Movie;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\Cast;
+use App\Models\Genre;
 
 class MoviesController extends Controller
 {
@@ -19,8 +21,9 @@ class MoviesController extends Controller
     public function index()
     {
         $movies = Movie::all();
+        $casts = Cast::all();
 
-        return view('admin.movies.index', compact('movies'));
+        return view('admin.movies.index', compact('movies', 'casts'));
     }
 
     /**
@@ -30,7 +33,9 @@ class MoviesController extends Controller
      */
     public function create()
     {
-        return view('admin.movies.create');
+        $genres = Genre::all();
+        $casts = Cast::all();
+        return view('admin.movies.create', compact('genres', 'casts'));
     }
 
     /**
@@ -39,13 +44,25 @@ class MoviesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreMovieRequest $request)
     {
-        $form_data = $request->all();
+        $form_data = $request->validated();
+        $slug = Movie::generateSlug($request->title, '-');
 
-        $new_movie = Movie::create($form_data);
+        $form_data['slug'] = $slug;
 
-        return Redirect()->route('admin.movies.index');
+        $newMovie = new Movie();
+
+        $newMovie->fill($form_data);
+
+
+        $newMovie->save();
+
+        if ($request->has('casts')) {
+            $newMovie->casts()->attach($request->casts);
+        }
+
+        return redirect()->route('admin.movies.index')->with('message', 'MOVIE CREATED');
     }
 
     /**
@@ -54,12 +71,9 @@ class MoviesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Movie $movie)
     {
-        $movie = Movie::findOrFail($id);
-
         return view('admin.movies.show', compact('movie'));
-        abort(404);
     }
 
 
@@ -69,11 +83,12 @@ class MoviesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Movie $movie)
     {
-        $movie = Movie::findOrFail($id);
-
-        return view('admin.movies.edit', compact('movie'));
+        $genres = Genre::all();
+        $casts = Cast::all();
+        //REINDIRIZZA ALLA PAGINA EDIT. VIENE PASSATO IL SINGOLO PROGETTO $project TRAMITE COMPACT
+        return view('admin.movies.edit', compact('movie', 'genres', 'casts'));
     }
 
     /**
@@ -86,10 +101,20 @@ class MoviesController extends Controller
     public function update(UpdateMovieRequest $request, Movie $project)
     {
 
-        $form = $request->validated();
+        $form_data = $request->validated();
+        $slug = Movie::generateSlug($request->title, '-');
 
-        $project->update($form);
-        return redirect()->route('admin.movies.index')->with('message', 'Movie Modificato');
+
+        $form_data['slug'] = $slug;
+
+        $project->update($form_data);
+
+        if ($request->has('casts')) {
+            $project->casts()->sync($request->casts);
+        }
+
+        //REINDIRIZZA ALLA PAGINA INDEX. LA FUNZIONE with PASSA ALLA PAGINA INDEX UN MESSAGGIO
+        return redirect()->route('admin.movies.index')->with('message', 'MODIFIED MOVIE');
     }
 
     /**
@@ -100,8 +125,11 @@ class MoviesController extends Controller
      */
     public function destroy(Movie $movie)
     {
+        $movie->casts()->sync([]);
+        //LA FUNZIONE "destroy" ELIMINA IL PROGETTO SPECIFICATO
         $movie->delete();
 
-        return redirect()->route('admin.movies.index');
+        //REINDIRIZZA ALLA PAGINA INDEX. LA FUNZIONE with PASSA ALLA PAGINA INDEX UN MESSAGGIO
+        return redirect()->route('admin.movies.index')->with('message', 'MOVIE CANCELLED');
     }
 }
