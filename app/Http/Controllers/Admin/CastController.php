@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Cast;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCastRequest;
@@ -61,6 +62,7 @@ class CastController extends Controller
      */
     public function show(Cast $cast)
     {
+
         return view('admin.casts.show', compact('cast'));
     }
 
